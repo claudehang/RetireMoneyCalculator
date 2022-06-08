@@ -37,5 +37,20 @@ class RetCalcSpec
       val expected = 309867.53176
       actual should ===(expected)
     }
+
+    "RetCalc.simulatePlan" should {
+      "calculate the capital at retirement and the capital after death" in {
+        val (capitalAtRetirement, capitalAfterDeath) = RetCalc.simulatePlan(
+          interestRate = 0.04 / 12,
+          nbOfMonthsSaving = 25 * 12,
+          nbOfMonthsRetiring = 40 * 12,
+          netIncome = 300,
+          currentExpense = 2000,
+          initialCapital = 10000
+        )
+        capitalAtRetirement should ===(541267.1990)
+        capitalAfterDeath should ===(309867.53176)
+      }
+    }
   }
 }

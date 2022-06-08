@@ -1,5 +1,6 @@
 package retcalc
 
+import java.util.function.DoubleToLongFunction
 import scala.annotation.unused
 
 object RetCalc {
@@ -16,4 +17,13 @@ object RetCalc {
       currentCapital * (1 + interestRate) + monthlySavings
     )
   }
+
+  def simulatePlan(
+      interestRate: Double,
+      nbOfMonthsSaving: Int,
+      nbOfMonthsRetiring: Int,
+      netIncome: Int,
+      currentExpense: Int,
+      initialCapital: Double
+  ): (Double, Double) = ???
 }
