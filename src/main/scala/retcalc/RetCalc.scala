@@ -1,8 +1,5 @@
 package retcalc
 
-import java.util.function.DoubleToLongFunction
-import scala.annotation.unused
-
 object RetCalc {
   def futureCapital(
       interestRate: Double,
@@ -25,5 +22,21 @@ object RetCalc {
       netIncome: Int,
       currentExpense: Int,
       initialCapital: Double
-  ): (Double, Double) = ???
+  ): (Double, Double) = {
+    val capitalAtRetirement = futureCapital(
+      interestRate,
+      nbOfMonthsSaving,
+      netIncome,
+      currentExpense,
+      initialCapital
+    )
+    val capitalAfterDeath = futureCapital(
+      interestRate,
+      nbOfMonthsRetiring,
+      0,
+      currentExpense,
+      capitalAtRetirement
+    )
+    (capitalAtRetirement, capitalAfterDeath)
+  }
 }

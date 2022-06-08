@@ -44,12 +44,12 @@ class RetCalcSpec
           interestRate = 0.04 / 12,
           nbOfMonthsSaving = 25 * 12,
           nbOfMonthsRetiring = 40 * 12,
-          netIncome = 300,
+          netIncome = 3000,
           currentExpense = 2000,
           initialCapital = 10000
         )
         capitalAtRetirement should ===(541267.1990)
-        capitalAfterDeath should ===(309867.53176)
+        capitalAfterDeath should ===(309867.5316)
       }
     }
   }
