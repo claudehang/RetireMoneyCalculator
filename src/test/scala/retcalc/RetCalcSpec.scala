@@ -25,5 +25,17 @@ class RetCalcSpec
       val expected = 541267.1990
       actual should ===(expected)
     }
+
+    "calculate how much savings will be left after taking pension for n months" in {
+      val actual = RetCalc.futureCapital(
+        interestRate = 0.04 / 12,
+        nbOfMonths = 40 * 12,
+        netIncome = 0,
+        currentExpense = 2000,
+        initialCapital = 541267.1990
+      )
+      val expected = 309867.53176
+      actual should ===(expected)
+    }
   }
 }
