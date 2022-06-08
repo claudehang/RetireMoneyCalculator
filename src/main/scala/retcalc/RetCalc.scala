@@ -7,7 +7,5 @@ object RetCalc {
       netIncome: Int,
       currentExpense: Int,
       initialCapital: Int
-  ): Double = {
-    541267.199
-  }
+  ): Double = ???
 }
