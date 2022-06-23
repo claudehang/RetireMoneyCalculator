@@ -65,5 +65,16 @@ class RetCalcSpec
       val expected = 23 * 12 + 1
       actual should ===(expected)
     }
+
+    "not loop forever if net income is less than expense" in {
+      val actual = RetCalc.nbOfMonthsSaving(
+        interestRate = 0.04 / 12,
+        nbOfMonthsRetiring = 40 * 12,
+        netIncome = 0,
+        currentExpense = 1,
+        initialCapital = 10000
+      )
+      actual should ===(Int.MaxValue)
+    }
   }
 }

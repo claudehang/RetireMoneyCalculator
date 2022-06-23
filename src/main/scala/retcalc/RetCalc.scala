@@ -65,6 +65,10 @@ object RetCalc {
         loop(nbOfMonthsForSaving + 1)
       }
     }
-    loop(0)
+    if (netIncome < currentExpense) {
+      Int.MaxValue
+    } else {
+      loop(0)
+    }
   }
 }
