@@ -44,5 +44,12 @@ class ReturnsSpec extends AnyWordSpec with Matchers {
       Returns.monthlyRate(variableReturns, 2) should ===(0.01)
       Returns.monthlyRate(variableReturns, 5) should ===(0.02)
     }
+
+    "return the (n+offset)-th monthly rate for OffsetReturns" in {
+      val offsetReturns = OffsetReturns(variableReturns, 1)
+      Returns.monthlyRate(offsetReturns, 0) should ===(0.02)
+      Returns.monthlyRate(offsetReturns, 2) should ===(0.02)
+      Returns.monthlyRate(offsetReturns, 5) should ===(0.01)
+    }
   }
 }

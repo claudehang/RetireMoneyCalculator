@@ -1,16 +1,20 @@
 package retcalc
 
+import scala.annotation.tailrec
+
 sealed trait Returns
 
 object Returns {
   // the month starts from 0 and max is 11
+  @tailrec
   def monthlyRate(returns: Returns, month: Int): Double = {
     returns match {
       case FixedReturns(annualRate) => annualRate / 12.0
       case VariableReturns(returns) =>
         returns(month % returns.length).monthlyRate
+      case OffsetReturns(returns, offset) =>
+        monthlyRate(returns, month + offset)
     }
-
   }
 }
 
@@ -23,3 +27,4 @@ case class VariableReturns(returns: Vector[VariableReturn]) extends Returns {
     )
   }
 }
+case class OffsetReturns(returns: Returns, offset: Int) extends Returns
