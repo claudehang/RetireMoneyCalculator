@@ -4,7 +4,7 @@ import scala.annotation.tailrec
 
 object RetCalc {
   def futureCapital(
-      interestRate: Double,
+      returns: Returns,
       nbOfMonths: Int,
       netIncome: Int,
       currentExpense: Int,
@@ -12,13 +12,17 @@ object RetCalc {
   ): Double = {
     val monthlySavings = netIncome - currentExpense
 
-    (0 until nbOfMonths).foldLeft(initialCapital)((currentCapital, _) =>
-      currentCapital * (1 + interestRate) + monthlySavings
-    )
+    (0 until nbOfMonths).foldLeft(initialCapital) {
+      case (currentCapital, month) =>
+        currentCapital * (1 + Returns.monthlyRate(
+          returns,
+          month
+        )) + monthlySavings
+    }
   }
 
   def simulatePlan(
-      interestRate: Double,
+      returns: Returns,
       nbOfMonthsSaving: Int,
       nbOfMonthsRetiring: Int,
       netIncome: Int,
@@ -26,14 +30,14 @@ object RetCalc {
       initialCapital: Double
   ): (Double, Double) = {
     val capitalAtRetirement = futureCapital(
-      interestRate,
+      returns: Returns,
       nbOfMonthsSaving,
       netIncome,
       currentExpense,
       initialCapital
     )
     val capitalAfterDeath = futureCapital(
-      interestRate,
+      returns: Returns,
       nbOfMonthsRetiring,
       0,
       currentExpense,
@@ -43,7 +47,7 @@ object RetCalc {
   }
 
   def nbOfMonthsSaving(
-      interestRate: Double,
+      returns: Returns,
       nbOfMonthsRetiring: Int,
       netIncome: Int,
       currentExpense: Int,
@@ -52,7 +56,7 @@ object RetCalc {
     @tailrec
     def loop(nbOfMonthsForSaving: Int): Int = {
       val (_, capitalAfterDeath) = simulatePlan(
-        interestRate,
+        returns,
         nbOfMonthsForSaving,
         nbOfMonthsRetiring,
         netIncome,

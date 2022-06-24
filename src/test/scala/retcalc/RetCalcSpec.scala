@@ -15,7 +15,7 @@ class RetCalcSpec
   "RetCalc.futureCapital" should {
     "calculate the amount of savings I will have in n months" in {
       val actual = RetCalc.futureCapital(
-        interestRate = 0.04 / 12,
+        returns = FixedReturns(0.04),
         nbOfMonths = 25 * 12,
         netIncome = 3000,
         currentExpense = 2000,
@@ -28,7 +28,7 @@ class RetCalcSpec
 
     "calculate how much savings will be left after taking pension for n months" in {
       val actual = RetCalc.futureCapital(
-        interestRate = 0.04 / 12,
+        returns = FixedReturns(0.04),
         nbOfMonths = 40 * 12,
         netIncome = 0,
         currentExpense = 2000,
@@ -41,7 +41,7 @@ class RetCalcSpec
     "RetCalc.simulatePlan" should {
       "calculate the capital at retirement and the capital after death" in {
         val (capitalAtRetirement, capitalAfterDeath) = RetCalc.simulatePlan(
-          interestRate = 0.04 / 12,
+          returns = FixedReturns(0.04),
           nbOfMonthsSaving = 25 * 12,
           nbOfMonthsRetiring = 40 * 12,
           netIncome = 3000,
@@ -56,7 +56,7 @@ class RetCalcSpec
   "RetCalc.nbOfMonthsSaving" should {
     "calculate how long I have to save money before I can retire" in {
       val actual = RetCalc.nbOfMonthsSaving(
-        interestRate = 0.04 / 12,
+        returns = FixedReturns(0.04),
         nbOfMonthsRetiring = 40 * 12,
         netIncome = 3000,
         currentExpense = 2000,
@@ -68,7 +68,7 @@ class RetCalcSpec
 
     "not loop forever if net income is less than expense" in {
       val actual = RetCalc.nbOfMonthsSaving(
-        interestRate = 0.04 / 12,
+        returns = FixedReturns(0.04),
         nbOfMonthsRetiring = 40 * 12,
         netIncome = 0,
         currentExpense = 1,
